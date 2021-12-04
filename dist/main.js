@@ -137,9 +137,11 @@ const openImage = () => {
     
     const img = new Image();
     img.src = (window.URL || window.webkitURL).createObjectURL(file);
-
+    
     // Once the image is loaded clear the canvas and draw the new image.
     img.onload = () => {
+        saveCanvasImage();
+        
         canvas.ctx.clearRect(0, 0, canvas.width, canvas.height);
         canvas.ctx.drawImage(img, 0, 0);
         
