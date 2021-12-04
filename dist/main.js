@@ -142,6 +142,8 @@ const openImage = () => {
     img.onload = () => {
         canvas.ctx.clearRect(0, 0, canvas.width, canvas.height);
         canvas.ctx.drawImage(img, 0, 0);
+        
+        saveCanvasImage();
     }
 }
 // Clear the canvas.
