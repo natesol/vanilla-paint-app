@@ -1,0 +1,343 @@
+@charset "UTF-8";
+
+/* ------------------------------------------------------------------------------------------------ */
+/* --- Style Reset -------------------------------------------------------------------------------- */
+
+*,
+::before,
+::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:focus,
+:active {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+}
+
+body {
+    min-height: 100%;
+}
+
+html,
+body,
+blockquote,
+pre,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+thead,
+tbody,
+tfoot,
+th,
+tr,
+td,
+form,
+fieldset,
+legend,
+textarea,
+figure,
+iframe,
+menu {
+    margin: 0;
+}
+
+html,
+body,
+thead,
+tbody,
+tfoot,
+th,
+tr,
+td,
+figure,
+iframe,
+ul,
+menu {
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+}
+
+li {
+    list-style: none;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* --- Typography --------------------------------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap?family=Open+Sans:wght@400;700;800&display=swap?family=Roboto:wght@400;700;900&display=swap');
+
+/* ------------------------------------------------------------------------------------------------ */
+/* --- App Base Styles ---------------------------------------------------------------------------- */
+
+:root {
+    /* Typology ----------------------- */
+    --ff-title: 'Poppins', Arial, sans-serif;
+    --ff-body: 'Poppins', Arial, sans-serif;
+
+    /* Colors ------------------------- */
+    --white: #fff;
+    --gray-01: #eceef3;
+    --gray-02: #d1d5db;
+    --gray-03: #6b7280;
+    --gray-04: #374151;
+    --gray-05: #0e1420;
+    --black: #010203;
+
+    --violet: #9900ff;
+    --pink: #e921b7;
+
+    --prim: var(--violet);
+    --accent: var(--pink);
+
+    --gradient-p-a: linear-gradient(135deg, var(--prim) 0%, var(--accent) 100%);
+
+    /*  */
+    --radius: 4px;
+
+    /*  */
+    --shadow: rgb(0 0 0 / 2%) 0px 0px 10px 2px, rgb(0 0 0 / 6%) 0px 8px 10px -6px;
+
+    /*  */
+    --body-bg-c: var(--gray-01);
+    --body-txt-c: var(--gray-04);
+
+    --canvas-bg-c: var(--white);
+
+    --title-c: var(--prim);
+
+    --btn-txt-c: var(--white);
+    --btn-bg-c: var(--gradient-p-a);
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* --- Global Styles ------------------------------------------------------------------------------ */
+
+::selection {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+html {
+    font-size: 16px;
+}
+@media screen and (max-width: 500px) {
+    html { font-size: 15px }
+}
+@media screen and (max-width: 400px) {
+    html { font-size: 14px }
+}
+@media screen and (max-width: 320px) {
+    html { font-size: 13px }
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: var(--ff-body);
+    background-color: var(--body-bg-c);
+    color: var(--body-txt-c);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    margin-inline: auto;
+    text-align: center;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* --- Utilities ---------------------------------------------------------------------------------- */
+
+.clickable {
+    cursor: pointer;
+}
+.clickable:hover {
+    transform: scale(1.05);
+}
+.clickable:active {
+    transform: scale(0.95);
+}
+
+.title {
+    background: var(--gradient-p-a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: var(--ff-title);
+    font-size: 2.2rem;
+    font-weight: 900;
+    display: inline-block;
+}
+
+.title * {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* --- Toolbar Styles ----------------------------------------------------------------------------- */
+
+.toolbar + .toolbar {
+    margin-top: 0.2rem;
+}
+
+.toolbar {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+.tool.number-input {
+    width: auto;
+}
+.tool.number-input span {
+    text-transform: capitalize;
+    font-size: 0.6rem;
+    font-weight: 700;
+    overflow-wrap: break-word;
+    width: 2.6rem;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    right: -0.2rem;
+    bottom: -0.4rem;
+}
+.tool.number-input input {
+    width: 3.2rem;
+    height: 100%;
+    background: transparent;
+    border: none;
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+#sides span {
+    width: 3.6rem;
+}
+
+#color {
+    display: flex;
+}
+.color-wrapper {
+    border-radius: 5rem;
+    border: 2px solid var(--gray-05);
+    overflow: hidden;
+    width: 70%;
+    height: 70%;
+    margin: auto;
+}
+#color-picker {
+    border: 0;
+    outline: 0;
+    appearance: none;
+    background-color: var(--body-bg-c);
+    padding: 0;
+    margin: -50% 0 0 -50%;
+    height: 200%;
+    width: 200%;
+    cursor: pointer;
+}
+
+.tool {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    font-size: 1.5rem;
+    color: var(--gray-04);
+    border-radius: var(--radius);
+}
+.tool i {
+    margin: auto;
+}
+
+.tool:hover {
+    background-color: var(--gray-02);
+}
+
+.tool.draw-tool.selected {
+    background-color: var(--prim);
+    color: var(--white);
+}
+
+.tool .icon {
+    width: 70%;
+    margin: auto;
+}
+#line .icon {
+    transform: rotate(45deg);
+}
+#ellipse i {
+    transform: skew(16deg, 16deg);
+}
+#text .icon {
+    width: 60%;
+}
+#text-input {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    border: none;
+    background: transparent;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 0 0 0.185em 0;
+    font-family: var(--ff-body);
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* --- Main Styles -------------------------------------------------------------------------------- */
+
+main {
+    margin-block: 0.4rem;
+}
+
+#canvas {
+    max-width: 1000px;
+    max-height: 800px;
+    width: 94vw;
+    height: calc(100vh - 15rem);
+    border-radius: var(--radius);
+    background-color: var(--canvas-bg-c);
+    box-shadow: var(--shadow);
+    cursor: default;
+}
+#canvas:active,
+#canvas:focus {
+    cursor: crosshair;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */

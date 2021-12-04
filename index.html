@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+
+    <!-- SEO - App Information -->
+    <meta name="author" content="natesol">
+    <meta name="description" content="Drawings - Simple Vanilla JS Paint Application.">
+    <meta name="copyright" content="natesol">
+    <meta name="keywords" content="natesol, domJS, dom js, dom.js">
+    <title>Drawings (JS Canvas Study)</title>
+
+    <!-- Styles -->
+    <!-- font-awesome (6.0.0) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- main styles -->
+    <link rel="stylesheet" href="main.css">
+
+    <!-- JavaScript -->
+    <!-- main js -->
+    <script src="main.js" defer="true"></script>
+</head>
+<body>
+    <header class="container">
+        <a href="/" class="title clickable">
+            <h1>Drawings</h1>
+        </a>
+        <div class="toolbar">
+            <label for="stroke-width" class="tool number-input" id="stroke" title="change tools stroke width">
+                <span>stroke width:</span>
+                <input type="number" name="stroke-width" id="stroke-width" value="2" min="1" max="50">
+            </label>
+            <label for="polygon-sides" class="tool number-input" id="sides" title="change polygon tool number of vertices">
+                <span>polygon vertices:</span>
+                <input type="number" name="polygon-sides" id="polygon-sides" value="6" min="3" max="15">
+            </label>
+            <label for="font-size" class="tool number-input" id="text" title="change text tool font size (px)">
+                <span>font size:</span>
+                <input type="number" name="font-size" id="font-size" value="16" min="16" max="72">
+            </label>
+            <label for="color-picker" class="tool clickable" id="color" title="change color">
+                <div class="color-wrapper">
+                    <input type="color" name="color-picker" id="color-picker" value="#000000">
+                </div>
+            </label>
+        </div>
+        <div class="toolbar">
+            <a href="" class="tool draw-tool clickable selected" id="brush" title="Brush tool">
+                <i class="fas fa-paint-brush"></i>
+            </a>
+            <a href="" class="tool draw-tool clickable" id="line" title="Line tool">
+                <svg class="icon" aria-hidden="true" focusable="false" role="img" viewBox="0 0 640 512">
+                    <path fill="currentColor" d="M640 239.87v31.26A15.88 15.88 0 0 1 624.14 287H15.87A15.88 15.88 0 0 1 0 271.13v-31.26A15.88 15.88 0 0 1 15.87 224h608.27A15.88 15.88 0 0 1 640 239.87z" />
+                </svg>
+            </a>
+            <a href="" class="tool draw-tool clickable" id="rectangle" title="Rectangle tool">
+                <svg class="icon" aria-hidden="true" focusable="false" role="img" viewBox="0 0 510 512">
+                    <path fill="currentColor" d="M462 64H48C21.5 64 0 85.5 0 112v288c0 26.5 21.5 48 48 48h414c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zm-6 336H54c-3.3 0-6-2.7-6-6V118c0-3.3 2.7-6 6-6h402c3.3 0 6 2.7 6 6v276c0 3.3-2.7 6-6 6z" />
+                </svg>
+            </a>
+            <a href="" class="tool draw-tool clickable" id="circle" title="Circle tool">
+                <i class="far fa-circle"></i>
+            </a>
+            <a href="" class="tool draw-tool clickable" id="ellipse" title="Ellipse tool">
+                <i class="far fa-circle"></i>
+            </a>
+            <a href="" class="tool draw-tool clickable" id="polygon" title="Polygon tool">
+                <i class="fas fa-draw-polygon"></i>
+            </a>
+            <a href="" class="tool draw-tool clickable" id="text" title="Text tool">
+                <svg class="icon" aria-hidden="true" focusable="false" role="img" viewBox="0 0 448 512">
+                    <path fill="currentColor" d="M432 32a16 16 0 0 1 16 16v96a16 16 0 0 1-16 16h-32a16 16 0 0 1-16-16v-32H264v304h40a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H144a16 16 0 0 1-16-16v-32a16 16 0 0 1 16-16h40V112H64v32a16 16 0 0 1-16 16H16a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16z" />
+                </svg>
+            </a>
+            <input type="text" id="text-input" autocomplete="off">
+        </div>
+    </header>
+
+    <main class="container">
+        <canvas id="canvas"></canvas>
+    </main>
+    
+    <footer class="toolbar container">
+        <a class="tool clickable" id="undo" title="Undo">
+            <i class="fas fa-undo"></i>
+        </a>
+        <label for="upload-img" class="tool clickable" id="open" title="Upload new image">
+            <input type="file" id="upload-img" name="upload-img" accept="image/*" style="display: none;">
+            <i class="far fa-folder-open"></i>
+        </label>
+        <a class="tool clickable" id="clear" title="Clear the canvas">
+            <i class="fas fa-trash-alt"></i>
+        </a>
+        <a class="tool clickable" id="download" title="Download your drawing">
+            <i class="fas fa-download"></i>
+            <a href="" id="download-init" download="image.png" style="display: none;"></a>
+        </a>
+    </footer>
+</body>
+</html>
