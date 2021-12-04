@@ -9,4 +9,4 @@ Drawings - a simple paint app built as a canvas study page.
 
 ---
 
-Live Demo: [Covid19 Data App](https://natesol.github.io/vanilla-paint-app/)
+Live Demo: [Drawings - Vanilla JS Paint App](https://natesol.github.io/vanilla-paint-app/)
